@@ -5,6 +5,7 @@ import tensorflow as tf
 from content_based_modules import *
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from nearest_based import KNN
+import os
 
 app = Flask(__name__)
 content_based_model = tf.keras.models.load_model('content_based.h5')
@@ -64,4 +65,6 @@ def genre_predict():
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    # app.run(port=5000, debug=True)
+    server_port = os.environ.get('PORT', '8080')
+    app.run(debug=False, port=server_port, host='0.0.0.0')
